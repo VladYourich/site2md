@@ -1,0 +1,50 @@
+[project]
+name = "site2md"
+version = "0.2.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "pydantic-settings>=2.6.0",
+    "redis[hiredis]>=5.2.0",
+    "arq>=0.27.0",
+    "playwright>=1.48.0",
+    "trafilatura>=1.12.0",
+    "readability-lxml>=0.8.1",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=5.3.0",
+    "markdownify>=0.13.0",
+    "prometheus-fastapi-instrumentator>=7.0.0",
+    "httpx>=0.28.0",
+    "mcp>=1.1.0",
+    "python-multipart>=0.0.17",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.8.0",
+    "fakeredis[lua]>=2.26.0",
+    "aiohttp>=3.10.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 130
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "SIM"]
+ignore = ["N818", "N817"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
